@@ -188,6 +188,24 @@
     .char-pill.warn { background: #fff7ed; color: #ea580c; }
     .char-pill.over { background: #fef2f2; color: #ef4444; }
 
+    .btn-randomize {
+      width: 100%;
+      height: 37px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--blue);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s, transform .15s;
+    }
+    .btn-randomize:hover { background: rgba(29,155,240,.1); }
+    .btn-randomize:active { transform: scale(.94); }
+    .btn-randomize.spin i { animation: spin .5s linear; }
+
     /* ── Avatar ── */
     .avatar-row { display: flex; align-items: center; gap: 12px; }
     .avatar-thumb {
@@ -287,45 +305,69 @@
     #tweet-card {
       background: white;
       border-radius: 0;
-      padding: 8px 10px;
+      padding: 8px 10px 7px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       transition: background .25s;
       width: 100%;
       flex-shrink: 0;
-      border-bottom: 1px solid #e5e7eb;
     }
-    #tweet-card.dark-theme  { background: #15202b; border-color: #2d3748; }
-    #tweet-card.dim-theme   { background: #1e2732; border-color: #2d3748; }
-    .phone-frame:has(#tweet-card.dark-theme) { background: #15202b; border-color: #2d3748; }
-    .phone-frame:has(#tweet-card.dim-theme)  { background: #1e2732; border-color: #2d3748; }
+    #tweet-card.dark-theme  { background: #15202b; }
+    #tweet-card.dim-theme   { background: #1e2732; }
+    .phone-frame:has(#tweet-card.dark-theme) { background: #15202b; }
+    .phone-frame:has(#tweet-card.dim-theme)  { background: #1e2732; }
 
-    .tc-header { display: flex; align-items: flex-start; margin-bottom: 5px; gap: 7px; }
-    .tc-avatar { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .tc-header { display: flex; align-items: flex-start; margin-bottom: 6px; gap: 7px; }
+    .tc-avatar { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 1px solid #e1e8ed; }
     .tc-user { flex: 1; }
-    .tc-name-row { display: flex; align-items: center; gap: 3px; }
-    .tc-name { font-weight: 700; font-size: 7px; color: rgb(15,20,25); line-height: 1.3; }
+    .tc-name-row { display: flex; align-items: center; gap: 2px; }
+    .tc-name { font-weight: 700; font-size: 7px; color: #14171a; line-height: 1.3; }
     #tweet-card.dark-theme .tc-name,
     #tweet-card.dim-theme  .tc-name { color: #fff; }
-    .tc-lock { width: 8px; height: 8px; fill: rgb(83,100,113); flex-shrink: 0; }
+    .tc-verified { width: 7px; height: 7px; flex-shrink: 0; display: inline-flex; }
+    .tc-lock { width: 8px; height: 8px; fill: #657786; flex-shrink: 0; }
     #tweet-card.dark-theme .tc-lock,
-    #tweet-card.dim-theme  .tc-lock { fill: #8b98a5; }
-    .tc-handle { color: rgb(83,100,113); font-size: 6px; }
+    #tweet-card.dim-theme  .tc-lock { fill: #8899a6; }
+    .tc-handle { color: #657786; font-size: 6px; line-height: 1.3; }
     #tweet-card.dark-theme .tc-handle,
-    #tweet-card.dim-theme  .tc-handle { color: #8b98a5; }
-    .tc-more { color: rgb(83,100,113); font-size: 12px; line-height: 1; cursor: pointer; }
-    .tc-content { font-size: 8px; line-height: 1.5; color: rgb(15,20,25); margin-bottom: 8px; white-space: pre-wrap; word-break: break-word; }
+    #tweet-card.dim-theme  .tc-handle { color: #8899a6; }
+    .tc-more { color: #657786; font-size: 12px; line-height: 1; cursor: pointer; }
+    .tc-content { font-size: 9px; line-height: 1.5; color: #14171a; margin: 0 0 9px; white-space: pre-wrap; word-break: break-word; font-weight: 400; }
     #tweet-card.dark-theme .tc-content,
     #tweet-card.dim-theme  .tc-content { color: #fff; }
-    .tc-meta { color: rgb(83,100,113); font-size: 5px; margin-bottom: 6px; display: flex; gap: 3px; flex-wrap: wrap; }
+    .tc-meta { color: #657786; font-size: 5px; line-height: 1.6; margin: 0 0 8px; display: flex; align-items: center; gap: 3px; flex-wrap: wrap; }
     #tweet-card.dark-theme .tc-meta,
-    #tweet-card.dim-theme  .tc-meta { color: #8b98a5; }
-    .tc-meta .client { color: rgb(29,155,240); }
-    .tc-stats-bar { border-bottom: 1px solid #e5e7eb; padding: 5px 0; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; color: rgb(83,100,113); font-size: 5px; }
+    #tweet-card.dim-theme  .tc-meta { color: #8899a6; }
+    .tc-meta .client { color: #1da1f2; }
+    .tc-stats-bar {
+      border-top: 1px solid #e1e8ed;
+      border-bottom: 1px solid #e1e8ed;
+      padding: 6px 0;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: baseline;
+      gap: 11px;
+      color: #657786;
+      font-size: 5.5px;
+      box-sizing: border-box;
+    }
     #tweet-card.dark-theme .tc-stats-bar,
-    #tweet-card.dim-theme  .tc-stats-bar { border-color: #2d3748; }
-    .tc-activity-icon { width: 10px; height: 10px; fill: rgb(83,100,113); flex-shrink: 0; }
-    .tc-actions { display: flex; justify-content: space-around; padding-top: 3px; }
-    .tc-action-icon { width: 10px; height: 10px; fill: rgb(83,100,113); display: block; cursor: pointer; }
+    #tweet-card.dim-theme  .tc-stats-bar { border-color: #38444d; }
+    .tc-stat-num { font-weight: 700; color: #14171a; }
+    #tweet-card.dark-theme .tc-stat-num,
+    #tweet-card.dim-theme  .tc-stat-num { color: #fff; }
+    .tc-stat-label { color: #657786; }
+    #tweet-card.dark-theme .tc-stat-label,
+    #tweet-card.dim-theme  .tc-stat-label { color: #8899a6; }
+    .tc-actions { display: flex; align-items: center; justify-content: space-between; padding: 4px 0 0; }
+    .tc-action-icon { width: 10px; height: 10px; display: block; cursor: pointer; }
+    .tc-action-icon.reply   { fill: #657786; }
+    .tc-action-icon.retweet { fill: #17bf63; }
+    .tc-action-icon.like    { fill: #e0245e; }
+    .tc-action-icon.share   { fill: #657786; }
+    #tweet-card.dark-theme .tc-action-icon.reply,
+    #tweet-card.dim-theme  .tc-action-icon.reply,
+    #tweet-card.dark-theme .tc-action-icon.share,
+    #tweet-card.dim-theme  .tc-action-icon.share { fill: #8899a6; }
     /* ══════════════════════════════════════════ */
 
     /* ── Spinner ── */
@@ -608,8 +650,16 @@
                     </div>
                   </div>
 
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <input type="checkbox" id="verifiedCheck" checked
+                      style="accent-color:var(--blue);width:15px;height:15px;cursor:pointer">
+                    <label for="verifiedCheck" style="font-size:.85rem;cursor:pointer;margin:0">
+                      Tampilkan centang biru (akun terverifikasi)
+                    </label>
+                  </div>
+
                   <div class="d-flex align-items-center gap-2">
-                    <input type="checkbox" id="lockCheck" checked
+                    <input type="checkbox" id="lockCheck"
                       style="accent-color:var(--blue);width:15px;height:15px;cursor:pointer">
                     <label for="lockCheck" style="font-size:.85rem;cursor:pointer;margin:0">
                       Tampilkan ikon kunci (akun privat)
@@ -643,6 +693,22 @@
                     <div class="col-4">
                       <div class="form-label-sm">Klien</div>
                       <input type="text" class="form-control-x" id="tweetClient" value="Twitter for iPhone" maxlength="40">
+                    </div>
+                  </div>
+
+                  <div class="row g-2 align-items-end">
+                    <div class="col-5">
+                      <div class="form-label-sm">Jumlah Retweet</div>
+                      <input type="text" class="form-control-x" id="retweetCount" value="128" maxlength="12">
+                    </div>
+                    <div class="col-5">
+                      <div class="form-label-sm">Jumlah Likes</div>
+                      <input type="text" class="form-control-x" id="likeCount" value="542" maxlength="12">
+                    </div>
+                    <div class="col-2">
+                      <button type="button" class="btn-randomize" id="randomizeStatsBtn" onclick="randomizeStats()" title="Acak jumlah retweet & likes">
+                        <i class="bi bi-shuffle"></i>
+                      </button>
                     </div>
                   </div>
 
@@ -683,7 +749,10 @@
                           <div class="tc-user">
                             <div class="tc-name-row">
                               <span class="tc-name" id="tc-name">Bukan Coretan</span>
-                              <svg id="tc-lock" class="tc-lock" viewBox="0 0 24 24">
+                              <svg id="tc-verified" class="tc-verified" viewBox="0 0 24 24">
+                                <path fill="#1da1f2" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91-1.01-1.01-2.52-1.27-3.91-.81-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.39-.46-2.9-.2-3.91.81-1.01 1.01-1.27 2.52-.81 3.91-1.31.66-2.19 1.91-2.19 3.34s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91 1.01 1.01 2.52 1.26 3.91.81.66 1.31 1.9 2.19 3.33 2.19s2.67-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81 1.01-1.01 1.27-2.52.81-3.91 1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/>
+                              </svg>
+                              <svg id="tc-lock" class="tc-lock" viewBox="0 0 24 24" style="display:none">
                                 <g><path d="M17.5 7H17v-.25c0-2.76-2.24-5-5-5s-5 2.24-5 5V7h-.5C5.12 7 4 8.12 4 9.5v9C4 19.88 5.12 21 6.5 21h11c1.38 0 2.5-1.12 2.5-2.5v-9C20 8.12 18.88 7 17.5 7zM13 16.73V18h-2v-1.27c-.59-.34-1-.99-1-1.73 0-1.1.9-2 2-2s2 .9 2 2c0 .74-.4 1.39-1 1.73zM15 7H9v-.25c0-1.66 1.34-3 3-3s3 1.34 3 3V7z"/></g>
                               </svg>
                             </div>
@@ -700,16 +769,14 @@
                           <span class="client" id="tc-client">Twitter for iPhone</span>
                         </div>
                         <div class="tc-stats-bar">
-                          <svg class="tc-activity-icon" viewBox="0 0 24 24">
-                            <g><path d="M8.75 21V3h2v18h-2zM18 21V8.5h2V21h-2zM4 21l.004-10h2L6 21H4zm9.248 0v-7h2v7h-2z"/></g>
-                          </svg>
-                          View Tweet activity
+                          <span><span class="tc-stat-num" id="tc-rt-count">128</span> <span class="tc-stat-label">Retweets</span></span>
+                          <span><span class="tc-stat-num" id="tc-like-count">542</span> <span class="tc-stat-label">Likes</span></span>
                         </div>
                         <div class="tc-actions">
-                          <svg class="tc-action-icon" viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg>
-                          <svg class="tc-action-icon" viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
-                          <svg class="tc-action-icon" viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>
-                          <svg class="tc-action-icon" viewBox="0 0 16 16" fill="rgb(83,100,113)">
+                          <svg class="tc-action-icon reply" viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"/></svg>
+                          <svg class="tc-action-icon retweet" viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
+                          <svg class="tc-action-icon like" viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>
+                          <svg class="tc-action-icon share" viewBox="0 0 16 16" fill="rgb(83,100,113)">
                             <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
                           </svg>
                         </div>
@@ -791,9 +858,9 @@
   /* ── Init ── */
   const now = new Date();
   document.getElementById('tweetTime').value =
-    now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', hour12:false});
+    now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', hour12:true});
   document.getElementById('tweetDate').value =
-    now.toLocaleDateString('en-US', {day:'2-digit', month:'short', year:'2-digit'});
+    now.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
 
   /* ── Live sync ── */
   const syncMap = {
@@ -803,6 +870,8 @@
     tweetTime:    () => document.getElementById('tc-time').textContent    = v('tweetTime'),
     tweetDate:    () => document.getElementById('tc-date').textContent    = v('tweetDate'),
     tweetClient:  () => document.getElementById('tc-client').textContent  = v('tweetClient'),
+    retweetCount: () => document.getElementById('tc-rt-count').textContent   = formatStat(v('retweetCount')),
+    likeCount:    () => document.getElementById('tc-like-count').textContent = formatStat(v('likeCount')),
     avatarUrl:    () => setAvatarSrc(v('avatarUrl')),
   };
   Object.keys(syncMap).forEach(id => {
@@ -812,8 +881,40 @@
   document.getElementById('lockCheck').addEventListener('change', function() {
     document.getElementById('tc-lock').style.display = this.checked ? '' : 'none';
   });
+  document.getElementById('verifiedCheck').addEventListener('change', function() {
+    document.getElementById('tc-verified').style.display = this.checked ? '' : 'none';
+  });
   function v(id) { return document.getElementById(id).value; }
   function syncAll() { Object.values(syncMap).forEach(fn => fn()); }
+
+  function formatStat(raw) {
+    const n = Number(String(raw).replace(/,/g, ''));
+    if (!isNaN(n) && String(raw).trim() !== '' && /^[\d,]+$/.test(String(raw).trim())) {
+      return n.toLocaleString('en-US');
+    }
+    return raw; // biarkan apa adanya jika user isi custom text seperti "1.2K"
+  }
+
+  function randomStatPair() {
+    // retweet lebih jarang daripada like, mirip pola asli
+    const retweet = Math.floor(Math.random() * 9800) + 12;
+    const ratio   = 2 + Math.random() * 5; // like biasanya 2x–7x retweet
+    const like    = Math.floor(retweet * ratio) + Math.floor(Math.random() * 40);
+    return { retweet, like };
+  }
+
+  function randomizeStats() {
+    const { retweet, like } = randomStatPair();
+    document.getElementById('retweetCount').value = retweet;
+    document.getElementById('likeCount').value = like;
+    syncMap.retweetCount();
+    syncMap.likeCount();
+    const btn = document.getElementById('randomizeStatsBtn');
+    btn.classList.remove('spin'); void btn.offsetWidth; btn.classList.add('spin');
+  }
+
+  // Auto-generate jumlah retweet & likes setiap kali halaman dibuka
+  randomizeStats();
   syncAll();
 
   document.getElementById('avatarFileInput').addEventListener('change', function(e) {
